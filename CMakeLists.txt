@@ -2,6 +2,8 @@
 # Distributed under the Boost Software License, Version 1.0.
 # See accompanying file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt
 
+if(NOT DEFINED IDF_TARGET)
+
 cmake_minimum_required(VERSION 3.5...3.16)
 
 project(boost_smart_ptr VERSION "${BOOST_SUPERPROJECT_VERSION}" LANGUAGES CXX)
@@ -27,3 +29,21 @@ if(BUILD_TESTING)
   add_subdirectory(test)
 
 endif()
+
+else()
+
+idf_component_register(
+    INCLUDE_DIRS
+        include
+    REQUIRES
+        boost_assert
+        boost_config
+        boost_core
+        boost_move
+        boost_static_assert
+        boost_throw_exception
+        boost_type_traits
+)
+
+endif()
+
